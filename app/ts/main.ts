@@ -32,7 +32,7 @@ class Bee {
     this.speed = 0
     this.createBee()
   }
-  createBee() {
+  private createBee() {
     // create head
     this.beeNode.appendChild(makeDiv('bee-head'))
 
@@ -48,7 +48,7 @@ class Bee {
     // display finalized bee
     this.beeNode.style.display = 'block'
   }
-  move(s: number, r: number) {
+  private move(s: number, r: number) {
     this.stop()
     // set random bee fast speed
     this.speed = Math.random() * s
@@ -64,7 +64,7 @@ class Bee {
       this.transform()
     }, 150)
   }
-  calculatePosition() {
+  private calculatePosition() {
     let rad = (this.rotation - 90) * (Math.PI / 180)
 
     this.translateX = Math.min(
@@ -77,7 +77,7 @@ class Bee {
       this.maxY,
     )
   }
-  transform() {
+  private transform() {
     this.beeNode.style.transform =
       'translate(' +
       this.translateX +
@@ -87,7 +87,7 @@ class Bee {
       this.rotation +
       'deg)'
   }
-  checkWallCollisions() {
+  private checkWallCollisions() {
     if (
       this.translateX == this.minX ||
       this.translateY == this.minY ||
@@ -97,10 +97,10 @@ class Bee {
       this.rotation += 90
     }
   }
-  stop() {
+  public stop() {
     clearInterval(this.timer)
   }
-  go() {
+  public go() {
     let fast = Math.random() * 2000 + 2000
     let slow = Math.random() * 2000 + 1000
     this.move(50, 30)
@@ -108,14 +108,12 @@ class Bee {
       this.FastMove(slow, 5, 70).then(() => this.FastMove(fast, 50, 30))
     }, fast + slow)
   }
-  async FastMove(t: number, s: number, r: number) {
+  public async FastMove(t: number, s: number, r: number) {
     await this.delay(t, s, r)
   }
-  async delay(milliseconds: number, s: number, r: number) {
+  private async delay(milliseconds: number, s: number, r: number) {
     this.move(s, r)
-    // setTimeout(() => {
-    //   this.FastMove(4000, 50, 30)
-    // }, milliseconds)
+
     return new Promise(resolve => {
       setTimeout(() => {
         resolve()
