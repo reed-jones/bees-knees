@@ -17,7 +17,11 @@ body {
 
   h1 {
     font-family: 'Lobster', cursive;
-    font-size: 10rem;
+    font-size: 8rem;
+    @media screen and (min-width: 380px) {
+      font-size: 10rem;
+    }
+    text-align: center;
   }
 }
 
@@ -27,7 +31,7 @@ body {
   left: 0;
   height: 40px;
   width: 40px;
-  transition: 0.5s;
+  transition: 0.3s;
   display: none;
   &-head {
     background: rgb(240, 250, 105);

@@ -8,7 +8,8 @@
     "serve": "gulp serve",
     "pug": "gulp pug",
     "scss": "gulp scss",
-    "ts": "gulp ts"
+    "ts": "gulp ts",
+    "build": "gulp build"
   },
   "license": "MIT",
   "devDependencies": {

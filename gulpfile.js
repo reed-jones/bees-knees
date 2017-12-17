@@ -45,3 +45,6 @@ gulp.task('ts', () => {
     .pipe(gulp.dest('dist/js'))
     .pipe(bs.stream())
 })
+
+gulp.task('build', ['pug', 'scss', 'ts'])
+gulp.task('default', ['build'])
