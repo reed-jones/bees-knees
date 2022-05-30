@@ -1,7 +1,7 @@
 const gulp = require('gulp'),
   bs = require('browser-sync'),
   pug = require('gulp-pug'),
-  sass = require('gulp-sass'),
+  sass = require('gulp-sass')(require('sass')),
   ts = require('gulp-typescript')
 
 gulp.task('serve', () => {
@@ -10,9 +10,9 @@ gulp.task('serve', () => {
       baseDir: './dist',
     },
   })
-  gulp.watch('app/scss/*.scss', ['scss'])
-  gulp.watch('app/pug/**/*.pug', ['pug'])
-  gulp.watch('app/ts/**/*.ts', ['ts'])
+  gulp.watch('app/scss/*.scss', gulp.series('scss'))
+  gulp.watch('app/pug/**/*.pug', gulp.series('pug'))
+  gulp.watch('app/ts/**/*.ts', gulp.series('ts'))
   gulp.watch('dist/**/*.html').on('change', bs.reload)
 })
 
@@ -46,5 +46,5 @@ gulp.task('ts', () => {
     .pipe(bs.stream())
 })
 
-gulp.task('build', ['pug', 'scss', 'ts'])
-gulp.task('default', ['build'])
+gulp.task('build', gulp.series('pug', 'scss', 'ts'))
+gulp.task('default', gulp.series('build'))
